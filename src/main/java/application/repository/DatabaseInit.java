@@ -26,7 +26,7 @@ public class DatabaseInit implements CommandLineRunner {
 		bruno.setUsername("bruno");
 		bruno.setPassword(passwordEncoder.encode("123"));
 		bruno.setActive(true);
-		bruno.setRole("USER");
+		bruno.setRole("ROLE_USER");
 
 		User admin = new User();
 		admin.setId(UUID.randomUUID());
