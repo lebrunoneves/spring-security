@@ -8,8 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 
+@EnableZuulProxy
 @SpringBootApplication
 public class SpringSecurityApplication {
 
@@ -38,11 +40,11 @@ public class SpringSecurityApplication {
 		return tomcat;
 	}
 
-	// Redirect requests from http:8082 to https:8443 using SSL
+	// Redirect requests from http:8080 to https:8443 using SSL
 	private Connector httpToHttpsRedirectConnector() {
 		Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
 		connector.setScheme("http");
-		connector.setPort(8082);
+		connector.setPort(8080);
 		connector.setSecure(false);
 		connector.setRedirectPort(8443);
 		return connector;

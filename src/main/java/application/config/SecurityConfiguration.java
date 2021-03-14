@@ -22,7 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	private UserService userService;
+	private final UserService userService;
 	private final JwtProperties jwtProperties;
 
 	@Autowired
@@ -50,7 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/api/public").permitAll()
 				.antMatchers("/api/admin").hasAuthority("ADMIN")
-				.antMatchers("/api/user").hasRole("USER");
+				.antMatchers("/api/user").hasRole("USER")
+				.antMatchers("/api/student").hasRole("USER");
 
 	}
 

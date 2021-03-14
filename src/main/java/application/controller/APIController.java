@@ -1,6 +1,5 @@
 package application.controller;
 
-import application.model.User;
 import application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
