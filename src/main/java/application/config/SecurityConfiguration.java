@@ -32,8 +32,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) {
-		auth.authenticationProvider(authenticationProvider());
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth
+				.userDetailsService(userService)
+				.passwordEncoder(passwordEncoder());
 	}
 
 	@Override
@@ -51,17 +53,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/public").permitAll()
 				.antMatchers("/api/admin").hasAuthority("ADMIN")
 				.antMatchers("/api/user").hasRole("USER")
-				.antMatchers("/api/student").hasRole("USER");
+				.antMatchers("/student").hasRole("USER");
 
-	}
-
-	@Bean
-	protected DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-		daoAuthenticationProvider.setUserDetailsService(userService);
-
-		return daoAuthenticationProvider;
 	}
 
 	@Bean
